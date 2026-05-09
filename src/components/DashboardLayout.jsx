@@ -60,6 +60,7 @@ function DashboardLayout({ isAdmin = false }) {
   const handleLogout = async () => {
     await logout();
     navigate("/login");
+    console.log("Logout Clicked");
   };
 
   return (
@@ -129,7 +130,8 @@ function DashboardLayout({ isAdmin = false }) {
           )}
         >
           <Link
-            to="/login"
+            // to="/login"
+            onClick={handleLogout}
             className={cn(
               "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm",
               "text-sidebar-foreground/45 hover:bg-destructive/10 hover:text-destructive",
@@ -288,7 +290,8 @@ function DashboardLayout({ isAdmin = false }) {
                     <Settings className="h-4 w-4" /> Settings
                   </Link>
                   <Link
-                    to="/login"
+                    // to="/login"
+                    onClick={handleLogout}
                     className="hover:bg-destructive/8 flex items-center gap-2.5 px-4 py-2.5 text-sm text-destructive transition-colors"
                   >
                     <LogOut className="h-4 w-4" /> Sign out

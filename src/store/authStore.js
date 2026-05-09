@@ -5,7 +5,7 @@ const useAuthStore = create((set, get) => ({
   user: null,
   token: null,
   isAuthenticated: false,
-  loading: false, // Initial loading state could be false since we don't persist tokens on load by default
+  loading: true, // Set to true by default to wait for initAuth to finish
 
   login: (userData, accessToken) => {
     set({
@@ -17,13 +17,11 @@ const useAuthStore = create((set, get) => ({
   },
 
   logout: async () => {
-    const token = get().token;
-    if (token) {
-      try {
-        await api.post('/auth/logout');
-      } catch (error) {
-        console.error("Logout API failed, continuing local clear", error);
-      }
+    try {
+      // API call will automatically include the HTTP-only cookie if withCredentials is true
+      await api.post('/auth/logout');
+    } catch (error) {
+      console.error("Logout API failed, continuing local clear", error);
     }
     
     set({
@@ -38,7 +36,26 @@ const useAuthStore = create((set, get) => ({
     set({ user: updatedUser });
   },
 
-  // Example of an action to fetch current user if token exists (e.g. from an interceptor or initial mount if you decide to persist later)
+  initAuth: async () => {
+    try {
+      // 1. Try to get a new access token. The HTTP-only cookie is sent automatically.
+      const rs = await api.post('/auth/refresh-token');
+      const newToken = rs.data.token || rs.data.data?.token;
+      
+      set({ token: newToken });
+
+      // 2. Fetch the current user profile
+      const response = await api.get('/users/getMe');
+      const fetchedUser = response.data?.data?.user || response.data?.user || response.data;
+      
+      set({ user: fetchedUser, isAuthenticated: true, loading: false });
+    } catch (error) {
+      // This will naturally fail if there's no valid HTTP-only cookie present
+      console.log("No valid session cookie found. User needs to login.");
+      set({ user: null, token: null, isAuthenticated: false, loading: false });
+    }
+  },
+
   fetchMe: async () => {
     const token = get().token;
     if (!token) {

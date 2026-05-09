@@ -3,6 +3,7 @@ import useAuthStore from '@/store/authStore';
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api/v1',
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -63,6 +64,7 @@ api.interceptors.response.use(
       isRefreshing = true;
 
       try {
+        // The HTTP-only cookie will be sent automatically with this request
         const rs = await api.post('/auth/refresh-token');
         const newToken = rs.data.token || rs.data.data?.token; // Adjust based on your API response structure
         
