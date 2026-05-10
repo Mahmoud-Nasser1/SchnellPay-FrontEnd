@@ -339,7 +339,7 @@ function BillsPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-border bg-muted/30">
-                {["Transaction ID", "Service", "Consumer #", "Amount", "Status"].map((h) => (
+                {["Reference", "Service", "Consumer #", "Amount", "Status"].map((h) => (
                   <th key={h} className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {h}
                   </th>
@@ -356,7 +356,7 @@ function BillsPage() {
               ) : filteredHistory.length > 0 ? (
                 filteredHistory.map((b, i) => (
                   <tr key={i} className="transition-colors hover:bg-muted/30">
-                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">#{b.transaction_id || `TX-${i+1}`}</td>
+                    <td className="px-4 py-3 font-mono text-xs text-muted-foreground">#{b.reference_number || b.transaction_id || `TX-${i+1}`}</td>
                     <td className="px-4 py-3">
                       <p className="text-sm font-medium text-foreground">{b.service_name}</p>
                       <p className="text-xs text-muted-foreground">{b.provider_name}</p>

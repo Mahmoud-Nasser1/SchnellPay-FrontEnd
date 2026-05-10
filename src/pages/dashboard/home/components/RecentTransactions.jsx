@@ -94,7 +94,7 @@ function RecentTransactions() {
                     <p
                       className={cn(
                         "text-sm font-bold",
-                        isReceived ? "text-success" : "text-foreground",
+                        isReceived ? "text-success" : "text-destructive",
                       )}
                     >
                       {isReceived ? "+" : "-"}
@@ -113,7 +113,7 @@ function RecentTransactions() {
                   {isReceived ? (
                     <ArrowDownLeft className="h-3.5 w-3.5 text-success" />
                   ) : (
-                    <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
+                    <ArrowUpRight className="h-3.5 w-3.5 text-destructive" />
                   )}
                 </div>
               </div>

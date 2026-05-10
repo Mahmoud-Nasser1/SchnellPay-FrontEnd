@@ -193,7 +193,8 @@ function AddMethodModal({ onClose }) {
                       type="password"
                       className="h-11"
                       placeholder="•••"
-                      maxLength={4}
+                      maxLength={3}
+                      minLength={3}
                       value={form.cvv}
                       onChange={(e) =>
                         update("cvv", e.target.value.replace(/\D/g, ""))
