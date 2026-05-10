@@ -27,7 +27,7 @@ import FundsPage from "./pages/dashboard/funds/Funds";
 import SettingsPage from "./pages/dashboard/settings/Settings";
 import AdminOverview from "./pages/admin/overview/AdminOverview";
 import AdminUsers from "./pages/admin/users/AdminUsers";
-import AdminKYC from "./pages/admin/AdminKYC";
+import AdminKYC from "./pages/admin/kyc/AdminKYC";
 import AdminProviders from "./pages/admin/providers/AdminProviders";
 import AdminServices from "./pages/admin/services/AdminServices";
 import AdminTransactions from "./pages/admin/transactions/AdminTransactions";
