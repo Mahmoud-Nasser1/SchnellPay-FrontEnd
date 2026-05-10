@@ -8,13 +8,11 @@ import SendRecipientStep from "./components/SendRecipientStep";
 import SendAmountStep from "./components/SendAmountStep";
 import SendReviewStep from "./components/SendReviewStep";
 import SendSuccess from "./components/SendSuccess";
+import { useToast } from "@/hooks/use-toast";
+import useAuthStore from "@/store/authStore";
+import api from "@/lib/api";
 
-const recentContacts = [
-  { id: 1, name: "Alice Johnson", email: "alice@example.com", avatar: "AJ", verified: true },
-  { id: 2, name: "Bob Smith", email: "bob@example.com", avatar: "BS", verified: true },
-  { id: 3, name: "Carol White", email: "carol@example.com", avatar: "CW", verified: false },
-  { id: 4, name: "David Lee", email: "david@example.com", avatar: "DL", verified: true },
-];
+// No mock data needed, we only use live search now
 
 function SendMoneyPage() {
   const [step, setStep] = useState("recipient");
@@ -24,11 +22,38 @@ function SendMoneyPage() {
   const [loading, setLoading] = useState(false);
   const [pinOpen, setPinOpen] = useState(false);
 
-  const handleSend = async () => {
+  const { fetchMe } = useAuthStore();
+  const { toast } = useToast();
+
+  const handleSend = async (pin) => {
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 2e3));
-    setLoading(false);
-    setStep("success");
+    try {
+      const payload = {
+        receiver_username: selected.username,
+        amount: Number(amount),
+        description: note || `Transfer to ${selected.name}`,
+        transaction_pin: pin
+      };
+
+      const res = await api.post("/transactions/send", payload);
+      
+      if (res.data.success) {
+        toast({
+          title: "Transfer Successful",
+          description: `Sent ${Number(amount).toFixed(2)} to ${selected.name}`,
+        });
+        await fetchMe(); // Refresh balance
+        setStep("success");
+      }
+    } catch (err) {
+      toast({
+        title: "Transfer Failed",
+        description: err.response?.data?.message || "Something went wrong",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const steps = ["Recipient", "Amount", "Confirm"];
@@ -64,7 +89,6 @@ function SendMoneyPage() {
               selected={selected}
               setSelected={setSelected}
               setStep={setStep}
-              recentContacts={recentContacts}
             />
           )}
 

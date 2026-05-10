@@ -2,8 +2,18 @@ import { Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import useAuthStore from "@/store/authStore";
 
 export default function SendReviewStep({ selected, amount, note, loading, setPinOpen, setStep }) {
+  const { user } = useAuthStore();
+  const userData = user?.data || user || {};
+  const currency = userData?.currency || "EGP";
+
+  const formatValue = (val) => new Intl.NumberFormat("en-EG", {
+    style: "currency",
+    currency: currency,
+  }).format(val);
+
   return (
     <div className="space-y-5">
       <h3 className="font-display text-lg font-semibold text-foreground">
@@ -11,11 +21,11 @@ export default function SendReviewStep({ selected, amount, note, loading, setPin
       </h3>
       <div className="space-y-3">
         {[
-          { label: "To", value: `${selected.name} (${selected.email})` },
-          { label: "Amount", value: `$${Number(amount).toFixed(2)}` },
+          { label: "To", value: `${selected.name} (@${selected.username})` },
+          { label: "Amount", value: formatValue(amount) },
           { label: "Fee", value: "Free" },
           { label: "Note", value: note || "\u2014" },
-          { label: "Total", value: `$${Number(amount).toFixed(2)}` },
+          { label: "Total", value: formatValue(amount) },
         ].map(({ label, value }, i) => (
           <motion.div
             key={label}
