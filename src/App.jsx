@@ -25,11 +25,11 @@ import TransactionsPage from "./pages/dashboard/transactions/Transactions";
 import BillsPage from "./pages/dashboard/bills/Bills";
 import FundsPage from "./pages/dashboard/funds/Funds";
 import SettingsPage from "./pages/dashboard/settings/Settings";
-import AdminOverview from "./pages/admin/AdminOverview";
+import AdminOverview from "./pages/admin/overview/AdminOverview";
 import AdminUsers from "./pages/admin/users/AdminUsers";
 import AdminKYC from "./pages/admin/AdminKYC";
-import AdminProviders from "./pages/admin/AdminProviders";
-import AdminServices from "./pages/admin/AdminServices";
+import AdminProviders from "./pages/admin/providers/AdminProviders";
+import AdminServices from "./pages/admin/services/AdminServices";
 import AdminTransactions from "./pages/admin/transactions/AdminTransactions";
 import NotFound from "./pages/not-found/NotFound";
 
