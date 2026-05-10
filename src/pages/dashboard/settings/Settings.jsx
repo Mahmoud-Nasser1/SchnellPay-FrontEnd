@@ -103,11 +103,6 @@ function SettingsPage() {
             >
               <Icon className="h-4 w-4 shrink-0" />
               {label}
-              {id === "activity" && (
-                <span className="ml-auto flex h-4 w-4 items-center justify-center rounded-full bg-destructive/80 text-[9px] font-bold text-destructive-foreground">
-                  1
-                </span>
-              )}
             </button>
           ))}
         </motion.div>
