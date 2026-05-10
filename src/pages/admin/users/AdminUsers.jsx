@@ -181,7 +181,8 @@ function AdminUsers() {
         <motion.div variants={fadeDown} custom={0} className="flex items-center justify-between">
           <div>
             <h1 className="font-display text-2xl font-bold text-foreground">Users Management</h1>
-            <p className="mt-1 text-sm text-muted-foreground"> All users</p>
+            <p className="mt-1 text-sm text-muted-foreground"> All 
+              users</p>
           </div>
           <Button variant="accent" size="sm" className="shadow-glow" onClick={handleDownloadPDF} disabled={downloadLoading}>
             {downloadLoading ? (

@@ -85,7 +85,7 @@ const AppContent = () => {
       </Route>
 
       {/* Admin Dashboard */}
-      {/* <Route element={<ProtectedRoute adminOnly />}> */}
+      <Route element={<ProtectedRoute adminOnly />}>
         <Route path="/admin" element={<DashboardLayout isAdmin />}>
           <Route index element={<AdminOverview />} />
           <Route path="users" element={<AdminUsers />} />
@@ -94,7 +94,7 @@ const AppContent = () => {
           <Route path="providers" element={<AdminProviders />} />
           <Route path="services" element={<AdminServices />} />
         </Route>
-      {/* </Route> */}
+      </Route>
 
       <Route path="*" element={<NotFound />} />
     </Routes>

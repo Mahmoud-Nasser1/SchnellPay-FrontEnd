@@ -36,7 +36,7 @@ function BillHistoryTable({ filteredHistory, searchQ, setSearchQ }) {
         <table className="w-full">
           <thead>
             <tr className="border-b border-border bg-muted/30">
-              {["ID", "Provider", "Category", "Amount", "Date", "Status"].map((h) => (
+              {["Reference", "Provider", "Category", "Amount", "Date", "Status"].map((h) => (
                 <th
                   key={h}
                   className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground"
@@ -49,7 +49,7 @@ function BillHistoryTable({ filteredHistory, searchQ, setSearchQ }) {
           <tbody className="divide-y divide-border">
             {filteredHistory.map((b) => (
               <tr key={b.id} className="transition-colors hover:bg-muted/30">
-                <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{b.id}</td>
+                <td className="px-4 py-3 font-mono text-xs text-muted-foreground">#{b.reference_number || b.id}</td>
                 <td className="px-4 py-3 text-sm font-medium text-foreground">{b.provider}</td>
                 <td className="px-4 py-3 text-sm text-muted-foreground">{b.category}</td>
                 <td className="px-4 py-3 text-sm font-bold text-foreground">{b.amount}</td>

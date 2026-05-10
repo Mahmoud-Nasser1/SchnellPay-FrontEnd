@@ -1,44 +1,42 @@
 import { Users } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeUp, stagger, viewport } from "@/lib/motion";
-
 const team = [
   {
-    name: "Alexandra Chen",
-    role: "CEO & Co-Founder",
-    img: "",
-    bio: "Former VP at Goldman Sachs with 15+ years in fintech.",
+    name: "Mahmoud Nasser",
+    role: "Software Engineer & Cybersecurity",
+    img: "/Mahmoud.jpeg",
+    bio: "developer specialized in full-stack engineering and Cybersecurity.",
   },
   {
-    name: "Marcus Reed",
-    role: "CTO & Co-Founder",
-    img: "",
-    bio: "Ex-Google engineer, built payment infra serving 50M+ users.",
+    name: "Youssef Alaa",
+    role: "Software Engineer",
+    img: "/Youssef2.jpeg",
+    bio: "backend architecture and building scalable fintech infrastructure.",
   },
   {
-    name: "Priya Sharma",
-    role: "Head of Security",
+    name: "Noran Ahmed",
+    role: "Software Engineer & Cybersecurity ",
     img: "",
-    bio: "Cybersecurity expert, former NSA cryptographer.",
+    bio: "Focused on system integrity, encryption, and protecting financial data from vulnerabilities.",
   },
   {
-    name: "Carlos Vega",
-    role: "Head of Design",
+    name: "Yahya Abdalaa",
+    role: "Software Engineer",
     img: "",
-    bio: "Award-winning UX designer previously at Stripe & Airbnb.",
+    bio: "Dedicated to developing seamless user experiences and high-performance system logic.",
   },
   {
-    name: "Elena Kowalski",
-    role: "CFO",
+    name: "Esraa Akram",
+    role: "Software Engineer | Data Analysis & ML",
     img: "",
-    bio: "CPA with expertise in fintech compliance & global payments.",
+    bio: "Specialized in data-driven insights and machine learning models for fraud detection.",
   },
 ];
 
 function AboutTeam() {
   return (
     <section className="relative py-24 bg-secondary/40 dark:bg-secondary/40 overflow-hidden">
-
       {/* LIGHT BACKGROUND (neutral off-white) */}
       <div className="pointer-events-none absolute inset-0 dark:hidden">
         <div className="absolute inset-0 bg-[#f6f7f8]" />
@@ -55,7 +53,6 @@ function AboutTeam() {
       </div>
 
       <div className="container relative mx-auto px-4">
-
         {/* HEADER */}
         <motion.div
           variants={fadeUp}
@@ -86,7 +83,7 @@ function AboutTeam() {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="flex flex-wrap justify-center gap-10 mx-auto max-w-8xl"
         >
           {team.map((member, i) => (
             <motion.div
@@ -94,47 +91,55 @@ function AboutTeam() {
               variants={fadeUp}
               custom={i}
               className="
-                group overflow-hidden rounded-2xl
+                group relative w-[210px] sm:w-[230px]
+                overflow-hidden rounded-xl
                 border border-border bg-card
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:shadow-[0_0_0_1px_rgba(16,185,129,0.25),0_10px_30px_rgba(16,185,129,0.15)]
+                transition-all duration-500
+                hover:-translate-y-1.5
+                hover:shadow-[0_12px_24px_rgba(0,0,0,0.06)]
               "
             >
-
               {/* IMAGE */}
-              <div className="h-44 w-full overflow-hidden bg-muted">
+              <div className="aspect-square w-full overflow-hidden bg-muted relative">
                 {member.img ? (
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+                  <>
+                    <img
+                      src={member.img}
+                      alt={member.name}
+                      className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  </>
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-sm text-muted-foreground">
-                    Add Image
+                  <div className="flex h-full w-full flex-col items-center justify-center bg-emerald-50/30 text-emerald-600/50">
+                    <div className="relative">
+                      <Users className="h-10 w-10 opacity-20" />
+                      <div className="absolute inset-0 blur-xl bg-emerald-400/20" />
+                    </div>
+                    <span className="mt-3 text-[9px] font-bold uppercase tracking-[0.2em]">Awaiting</span>
                   </div>
                 )}
               </div>
 
               {/* CONTENT */}
-              <div className="p-5 text-center">
-                <h3 className="font-display font-bold text-foreground">
+              <div className="p-4 text-center">
+                <h3 className="font-display text-base font-bold text-foreground transition-colors duration-300 group-hover:text-emerald-600">
                   {member.name}
                 </h3>
 
-                <p className="mt-1 text-xs font-semibold text-emerald-600">
+                <p className="mt-1 text-[11px] font-semibold text-emerald-600/80">
                   {member.role}
                 </p>
 
-                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                <div className="mt-3 h-px w-6 bg-emerald-100 mx-auto transition-all duration-500 group-hover:w-12 group-hover:bg-emerald-300" />
+
+                <p className="mt-3 text-[10px] leading-relaxed text-muted-foreground line-clamp-3">
                   {member.bio}
                 </p>
               </div>
             </motion.div>
           ))}
         </motion.div>
-
       </div>
     </section>
   );
