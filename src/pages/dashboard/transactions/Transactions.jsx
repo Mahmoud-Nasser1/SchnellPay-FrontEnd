@@ -111,10 +111,12 @@ function TransactionsPage() {
       allTransactions.forEach(tx => {
         // Evaluate isCredit based on transaction logic
         const isCredit = 
-          tx.transaction_type === "deposit" || 
+          (tx.transaction_type === "deposit" || 
           tx.transaction_type === "refund" ||
           tx.receiver_id == userId ||
-          (tx.receiver_username && currentUsername && tx.receiver_username.toLowerCase() === currentUsername.toLowerCase());
+          (tx.receiver_username && currentUsername && tx.receiver_username.toLowerCase() === currentUsername.toLowerCase())) &&
+          tx.transaction_type !== "withdraw" && 
+          tx.transaction_type !== "bill";
 
         const txName = tx.description || tx.sender_name || tx.receiver_name || tx.name || "Transaction";
         const txId = tx.reference_number || tx.transaction_id || tx.id;

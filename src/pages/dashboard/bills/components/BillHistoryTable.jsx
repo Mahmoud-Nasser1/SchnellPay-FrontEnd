@@ -52,7 +52,7 @@ function BillHistoryTable({ filteredHistory, searchQ, setSearchQ }) {
                 <td className="px-4 py-3 font-mono text-xs text-muted-foreground">#{b.reference_number || b.id}</td>
                 <td className="px-4 py-3 text-sm font-medium text-foreground">{b.provider}</td>
                 <td className="px-4 py-3 text-sm text-muted-foreground">{b.category}</td>
-                <td className="px-4 py-3 text-sm font-bold text-foreground">{b.amount}</td>
+                <td className="px-4 py-3 text-sm font-bold text-destructive">-{b.amount}</td>
                 <td className="px-4 py-3 text-sm text-muted-foreground">{b.date}</td>
                 <td className="px-4 py-3">
                   <span
