@@ -362,7 +362,7 @@ function BillsPage() {
                       <p className="text-xs text-muted-foreground">{b.provider_name}</p>
                     </td>
                     <td className="px-4 py-3 text-sm text-muted-foreground">{b.consumer_number || "N/A"}</td>
-                    <td className="px-4 py-3 text-sm font-bold text-foreground">${Number(b.amount).toFixed(2)}</td>
+                    <td className="px-4 py-3 text-sm font-bold text-destructive">-${Number(b.amount).toFixed(2)}</td>
                     <td className="px-4 py-3">
                       <span className={cn(
                         "rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide",

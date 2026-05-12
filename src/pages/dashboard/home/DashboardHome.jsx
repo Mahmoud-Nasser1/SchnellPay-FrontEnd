@@ -35,10 +35,12 @@ function DashboardHome() {
     txs.forEach((tx) => {
       const amount = parseFloat(tx.amount) || 0;
       const isReceived = 
-        tx.receiver_id == userId ||
+        (tx.receiver_id == userId ||
         (tx.receiver_username && currentUsername && tx.receiver_username.toLowerCase() === currentUsername.toLowerCase()) ||
         tx.transaction_type === "deposit" ||
-        tx.transaction_type === "refund";
+        tx.transaction_type === "refund") &&
+        tx.transaction_type !== "withdraw" &&
+        tx.transaction_type !== "bill";
       
       if (isReceived) {
         income += amount;

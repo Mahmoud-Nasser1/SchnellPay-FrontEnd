@@ -65,10 +65,12 @@ function RecentTransactions() {
         ) : (
           transactions.map((tx) => {
             const isReceived = 
-              tx.receiver_id == userId ||
+              (tx.receiver_id == userId ||
               (tx.receiver_username && currentUsername && tx.receiver_username.toLowerCase() === currentUsername.toLowerCase()) ||
               tx.transaction_type === "deposit" ||
-              tx.transaction_type === "refund";
+              tx.transaction_type === "refund") &&
+              tx.transaction_type !== "withdraw" &&
+              tx.transaction_type !== "bill";
             const counterparty = isReceived
               ? tx.sender_name || (tx.transaction_type === "refund" ? "Refund" : "Deposit")
               : tx.receiver_name || tx.description || "Payment";
